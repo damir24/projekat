@@ -1,0 +1,691 @@
+1. Sekcija za zapis podataka (data section) pocinje DIREKTIVOM:
+• .data
+2. Sekcija za zapis (text section) pocinje direktivom:
+• .text
+3. Inicijalna/glavna procedura se oznacava sa:
+• main
+4. Kojom instrukcijom se ucitava konstanta(immediate vrijednost) u
+destinacioni registar ? Napisati samo ime instrukcije.
+• "LI" (Load immediate)
+5. Kojom istrukciom se ucitava adresa u destinacioni registar?
+Napisati samo ime instrukcije.
+• "la" (Load Address)
+6. Stek funkcionise po principu:
+• Last in First Out
+7. Oznaci instrukcije bezuslovnog skoka od ponuđenih.
+• J
+• Jr
+• jal
+8. Oznaci instrukcije uslovnog skoka.
+• Bne
+• Ble
+• beq
+9. Zbog nacina na koji funkcionise podaci sa steka se citaju u
+obrnutom redosledu u odnosu na onaj u kom su upisani.
+• TACNO
+10. Prilikom citanja integera, osim odgovarajuceg pozivnog koda,
+nije potrebno prosleđivati vise ni jedan podatak.
+• NETACNO
+11. Sta cuva pozivna procedura u slucaju Callee konvencije:
+• Registar ra
+12. U MIPS asembleru procedure imaju na raspolaganju kompletan
+seta registra.
+• TACNO
+13. Povezi parove:
+• Caller konvencija – ovom konvencijom su definisani
+zahtjevi za rutinu koja poziva proceduru
+• Calee konvencija – ovom konvencijom su definisani
+zahtjevi za pozvanu proceduru
+14. Operativni sistem obezbeđuje neke osnovne funkcije koje
+korisnicki programi ne mogu sami da obave i te funkcije se nazivaju
+sistemskim pozivima.
+• TACNO
+15. Stek nije moguce koristiti u asembleru.
+• Netacno
+16. Napisati liniju koda kojom se deklarise promjenjiva broj , tipa
+word i inicijalizuje na vrijednost 5.
+• broj: .word 5
+17. Prilikom stampanja integera, osim odgovarajuceg pozivnog
+koda, nephodno je proslediti intiger koji se ispisuje kroz $a0.
+18. Oznaci osnovne karakteristike RISC arhitekture mikroracunara.
+• Маli broj instrukcija koje koriste uniforman nacin
+zapisa
+• Duzi zapis programa, ali jednostavnija struktura
+hardvera.
+19. Osobine CISC racunara:
+• Promjenljiva duzina instrukcijske rijeci
+(neuniforman zapis)
+• Izvrsavanje vise operacija u okviru jedne instrukcije
+• Jednostavan zapis programa, ali slozena struktura
+hardvera
+20. Koliko operanada ima svaka bare (potpuna) instrukcija u MIPSu?
+• 3
+21. Napisati liniju koda kojom se deklarise string pozdrav i iniclizuje
+na vrijednost Zdravo. String je terminisan nulom.
+• pozdrav: . asciiz"Zdravo"
+22. Push i pop operacije nijesu realizovane u aseblerskom jeziku, pa
+ih je potrebno napraviti pomocu postojecih instrukcija.
+• TACNO
+23. Ako se argumenti smestaju na stek, $fp se podesava na sledeci
+nacin:
+• $sp + (velicina frejma)
+24. Ulazni argumenti se proceduri prosleđuju pomocu.
+• Registara a0,a1,a2,a3
+• Steka, ako ima vise od 4 ulazna argumenta
+25. Procedura vraca rezultate pomocu:
+• $v0 i $v1
+26. Pozivni kod (call code) za stampanje stringa je:
+• 4
+27. Pozivni kod (call code) za citanje stringa je:
+• 8
+28. Pozivni kod (call code) za citanje intigera je:
+• 5
+29. Oznaci koji od ponuđenih je ishod instrukcije
+ bnez $t0 , loop
+• Ukoliko sadrzaj registra $t0 nije jednak nuli, idi na
+labelu loop
+30. Podaci koji se smjestaju ili preuzimaju sa steka su:
+•
+31. Oznaci tacan ishod ove instrukcije:
+ble $t7,8,next
+• Ako je sadrzaj registra $t7 manji ili jednak 8, idi na
+labelu "next".
+32. MIPS ima 32 , 32-bitna registra i 64, 64-bitna floating-point
+registra
+• netacno
+33. Kada nam je potreban neki od sistemskih poziva moramo
+koristiti syscall koji/a se ucitava kroz $v0.
+34. Prazne linije koda su prihtljive.
+• Tacno
+35. Pojam povezivanja (linkage) u kontestu procedura se odnosi na
+osnovni proces ,,odlaska“ na proceduru i ,,vracanja“ na tacnu
+lokaciju u pozivajucoj rutini.
+• Tacno
+36. Jal instukcija kopira sadrzaj registra pc u registar ra i potom
+omogucava skok na proceduru.
+• Tacno
+37. Vrste podataka u MIPS-u i njihove velicine:
+• Byte -- 8 bita integer
+• Halfword – 16 bita integer
+• Word – 32 bita integer
+• Float – 32 bita floating-point broj
+• Double – 64 bita floating-point broj
+38. Povratak iz procedure se obavlja instrukcijom:
+• jr $ra
+39. Integeri se definisu direktivama:
+• .word
+• .half
+• .byte
+Zadaci:
+1.
+li $t0 ,0
+ bgez $t0, L
+ mul $t0 , $t0 , 5
+ j Exit
+L: add $t0 , $t0 , 5
+Exit: sw $t0 , a1
+Resenje : 5
+
+2.
+li $t0 , 2
+add $t1 , $t0 , 5
+div $t2 , $t1 , $t0
+mul $t1 , $t0 , $t0
+Resenje : 3
+3.
+li $t0 ,3
+blez $t0, L
+sub $t0 , $t0 , 1
+j Loop
+L: add $t0 , $t0 , 10
+Exit: sw $t0 , result
+Resenje : 12
+4.
+.data
+n: .word 4
+rez: .word 0
+.text
+.globl main
+main:
+ lw $t0 , n
+ li $t1 , 1
+Loop:
+ mul $t3 , $t1 , $t1
+ add $t1 , $t1 , 1
+ ble $t1 , $t0 , Loop
+ sw $t3 , rez
+ li $v0 , 10
+ syscall
+.end main
+Resenje : 16
+5.
+.data
+niz: .word 1 , 3 , 5 , 7 , 9
+rez: .word 0
+.text
+.globl main
+main:
+ la $t0 , niz
+ li $t1 , 4
+ mul $t2 , $t1 , 4
+ add $t3 , $t0 , $t2
+ lw $t4 , ($t3)
+ sw $t4 , rez
+ li $v0 , 10
+ syscall
+.end main
+Resenje : 9
+6.
+.data
+niz: .word 2 , 4 , 6 , 8
+duzina: .word 4
+rez: .word 0
+.text
+.globl main
+main:
+ la $t0 , niz
+ lw $t1 , duzina
+ li $t2 , 0
+Loop:
+ lw $t3 , ($t0)
+ add $t2 , $t2 , $t3
+ add $t0 , $t0 , 4
+ sub $t1 , $t1 , 1
+ bnez $t1 , Loop
+ sw $t2 , rez
+ li $v0 , 10
+ syscall
+.end main
+Resenje : 20
+7.
+.data
+a: .word 2
+b: .word 4
+rez: .word 0
+.text
+.globl main
+main:
+ lw $t0 , a
+ lw $t1 , b
+ mul $t3 , $t0 , $t1
+ mul $t3 , $t3 , 6
+ sw $t3 , rez
+ li $v0 , 10
+ syscall
+.end main
+Resenje : 48
+8.
+.data
+string: .asciiz “Dobar Dan!“
+rez: .word 0
+.text
+.globl main
+main:
+ la $t0 , string
+ li $t1 , 0
+Loop:
+ lb $t2 , ($t0)
+ beqz $t2 , Exit
+ add $t0 , $t0 , 1
+ add $t1 , $t1 , 1
+ j Loop
+Exit:
+ Sw $t1 , rez
+ li $v0 , 10
+ syscall
+.end main
+Resenje : 10
+PROJEKAT
+- skripta-
+
+Prva prezentacija
+
+	UVOD
+
+Minimalan skup komponenti od kojih je sastavljen neki funkcionalni racunarski sistem se naziva mikroracunar.
+Mikroracunar sluzi za izvrsavanje softvera koji je podrzan od strane hardverske arhitekture sistema. Mikroracunarski sistemi se uglavnom optimizuju ili sa stanovista softvera, ili sa stanovista hardvera. U skladu sa tim, postoje dvije standardne arhitekture mikroracunara:
+	CISC (Complex Instruction Set Computer)
+	RISC (Reduced Instruction Set Computer)
+Osobine CISC racunara
+	Promjenljiva duzina instrukcijske rijeci (neuniforman zapis),
+	Izvrsavanje vise operacija u okviru jedne instrukcije,
+	Jednostavan zapis programa, ali slozena struktura hardvera.
+Osobine RISC racunara:
+	Маli broj instrukcija koje koriste uniforman nacin zapisa,
+	Svaka instrukcija obavlja jednu operaciju: pristup memoriji,
+	izracunavanje, ispitivanje određenih uslova, itd.
+	Mali broj instrukcija obezbjeđuje brze izvrsavanje pojedinacnih instrukcija,
+	Duzi zapis programa, ali jednostavnija struktura hardvera.
+
+	ARHITEKTURA RACUNARA
+
+Osnovne kompotente racunara su:
+	Centralna procesorska jedinica (CPU),
+	Primarna (operativna) memorija - Random Access Memory (RAM),
+	Sekundarna memorija (Hard Disk Drive),
+	Ulazno/Izlazni uredjaji (npr. monitor, mis, tastatura ...),
+	Magistrale (Bus-es).
+Programi i podaci se generalno smjestaju u sekundarnoj memoriji. Kada se program izvrsava, mora biti iskopiran u operativnu memoriju, odakle ga CPU izvrsava.
+
+
+
+
+
+
+
+
+	ASEMBLERSKI PROGRAMSKI JEZIK
+
+Kako racunar razumije ono sto zelimo od njega? U cilju upravljanja racunarom covjek mora upotrebljavati jezik kojim racunar komunicira. Jezik racunara (masine) se naziva masinskim jezikom. Rijeci koje se upotrebljavaju u masinskom jeziku, u cilju kreiranja određenih akcija, se nazivaju instrukcijama dok se vokabular masinskog jezika naziva skupom instrukcija. Instrukcije zadaje covjek u nekom od visih programskih jezika, na nacin koji je, zavisno od upotrebljavanog viseg programskog jezika, vise ili manje slican uobicajenom covjekovom nacinu komuniciranja. Sa druge strane, u racunaru se instrukcije zapisuju u obliku niza jedinica i nula.
+
+Kako se dolazi do zapisivanja naredbi, pisanih u nekom od visih programskih jezika, u obliku niza jedinica i nula? Program pisan u nekom od visih programskih jezika se najprije konvertuje u simbolicki oblik. Ovaj proces se obavlja kompajliranjem u odgovarajucem sistemskom software-u – kompajleru. Kompajliranje moze izvrsavati i covjek (programer u asemblerskom jeziku). Simbolicka reprezentacija instrukcija se naziva reprezentacijom u asemblerskom jeziku. Numericki ekvivalent programa napisanog u simbolickom obliku se naziva masinskim kodom. Transformacija programa napisanog u simbolickom obliku u masinski jezik se naziva asembliranjem i izvrsava se sistemskim software-om – asemblerom.
+
+MIPS je skracenica koja se sastoji od pocetnih slova engleskih rijeci Millions Instructions Per Second, kojima se oznacava arhitektura kojom se omogucava izvrsavanje nekoliko miliona instrukcija u jednoj sekundi.
+
+	QtSpim – TIPOVI PODATAKA
+
+Osnovni tipovi podataka su: integer, floating-point, i karakteri. Pregled vrste podataka i njihovih memorijskih velicina:
+Ime	Velicina
+Byte	8-bitni integer
+Halfword/Half	16-bitni integer
+Word	32-bitni integer
+Float	32-bitni floating-point broj
+Double	64-bitni floating-point broj
+Memorija se moze posmatrati kao niz bajtova, koji slijede jedan iza drugog. Dakle, memorija je bajt- adresabilna: Svaka memorijska adresa sadrzi 1 bajt informacije. Da bismo memorisali rijec (word) 4 bajta su potrebna, pri cemu svaki od ta 4 bajta zahtijeva memorijsku adresu.
+
+
+	Bajt najmanje vaznosti - Least Significant Byte (LSB) je smesten na najnizoj memorijskoj adresi.
+	Bajt najvece vaznosti – Most Significant Byte (MSB) je smjesten na najvisoj memorijskoj adresi.
+
+31		.	.	.			24	23		.	.	.			16	15		.	.	.			8	7		.	.	.			0
+MSB			LSB
+
+QtSpim – CPU REGISTRI
+
+Ime registra	Broj registra	Namjena registra
+$zero	$0	Hardverski setovan na 0
+$at	$1	Privremeni asemblerski registar
+$v0 - $v1	$2 - $3	Rezultati procedure
+$a0 - $a3	$4 - $7	Argumenti procedure
+$t0 - $t7	$8 - $15	Privremeni registri
+$s0 - $s7	$16 - $23	Saved registers
+$t8 - $t9	$24 - $25	Privremeni registri
+$k0 - $k1	$26 - $27	Rezervisani za OS kernel
+$gp	$28	Globalni pokazivac
+$sp	$29	Pokazivac na vrh steka
+$fp	$30	Frame pokazivac
+$ra	$31	Povratna adresa
+ 
+
+QtSpim – REZEREVISANI REGISTRI
+
+Ime registra	Broj registra	Namjena registra
+$at	$1	Privremeni asemblerski registar
+$k0 - $k1	$26 - $27	Rezervisani za OS kernel
+$gp	$28	Globalni pokazivac
+Upotreba rezervisanih registara u korisnickim programima nije dozvoljena!
+
+QtSpim – OSTALI REGISTRI
+
+Ime registra	Namjena registra
+$pc	Program counter
+$status ili $psw	Statusni registar
+$cause	Registar za izuzetke
+$hi	Koriste se za operacije mnozenja i dijeljenja
+$lo	
+ 
+
+	$pc pokazuje na sljedecu instrukciju koja treba da se izvrsi. Ovaj registar se tipicno ne upotrebljava u korisnickim programima.
+	$status (ili $psw) je statusni register procesora. Ovaj registar se tipicno ne upotrebljava u korisnickim programima.
+	$cause je registar za izuzetke koji koristi CPU u slucaju izuzetaka ili pojave neocekivanih prekida u toku programa. Primjeri izuzetaka su: dijeljenje sa nulom, pokusaj pristupa nelegalnoj/nepostojecoj memorijskoj adresi, pokusaj izvrsavanja neispravne/nevazece instrukcije.
+	$hi i $lo registre koriste neke instrukcije mnozenja i dijeljenja. Na primjer, mnozenje dvije 32-bitne vrijednosti moze generisati 64-bitni rezultat, koji se u tom slucaju smjesta u $hi i $lo (po 32-bita u svaki od ova dva registra).
+
+
+
+QySpim – REPREZENTACIJA INTEGER-A
+
+Reprezentacija integera se odnosni na to kako racunar smjesta ili reprezentuje brojeve u memoriji. Zapis brojeva je, naravno, binarni. Dalje, racunar ima ogranicenu kolicinu prostora za svaki broj ili varijablu. Ova cinjenica direktno utice na velicinu odnosno opseg brojeva koji mogu biti zapisani. Na primjer, 1 bajt (8 bita) se moze koristiti za zapis 28=256 razlicitih brojeva. Tih 256 razlicitih brojeva moze biti neoznaceno (unsigned), tj. pozitivnou slucaju da reprezentujemo brojeve od 0 zakljucno sa 255. Ukoliko se odlucimo za oznacene (signed) brojeve, odnosno pozitivne i negativne, tada mozemo reprezentovati brojeve od  128 zakljucno sa +127.
+
+Velicina	Velicina	Unsigned opseg	Signed opseg
+Bajt (8 bita)	28	[0; 255]	[-128; 127]
+Halfword (16 bita)	216	[0; 65535]	[-32, 768; 32,767]
+Word (32 bita)	232	[0; 4, 294, 967, 295]	[−2,147,483,648;
+−2,147,483,647]
+
+QySpim – reprezentacija 32 – bitnim floating point brojeva
+
+IEEE 754 32-bitni floating-point standard:
+
+31	30	29	28	27	26	25	24	23	22		. . .		0
+S	Biased Exponent	Mantisa
+
+	S je bit znaka (sign bit). Ako je S=1, broj je negativan; u suprotnom je pozitivan.
+	Biased Exponent je vrijednost eksponeneta normalizovane vrijednosti broja sabran sa 127. Zauzima 8 bita.
+	Mantisa predstavlja decimalni dio normalizovane vrijednosti broja. Zauzima 23 bita.
+	Vrijednost broja:
+〖(-1)〗^S (1+Mantisa)〖2 〗^(Biased Exponent-127)
+
+QySpim – reprezentacija 32 – bitnim floating point brojeva
+
+IEEE 754 64-bitni floating-point standard:
+
+64	63	62		.	.	.		52	51		. . .		0
+S	Biased Exponent	Mantisa
+
+	S je bit znaka (sign bit). Ako je S=1, broj je negativan; u suprotnom je pozitivan.
+	Biased Exponent je vrijednost eksponeneta normalizovane vrijednosti broja sabran sa 1023. Zauzima 11 bita.
+	Mantisa predstavlja decimalni dio normalizovane vrijednosti broja. Zauzima 52 bita.
+	Vrijednost broja:
+〖(-1)〗^S (1+Mantisa)〖2 〗^(Biased Exponent-1023)
+
+
+
+
+
+
+
+
+Druga prezentacija
+
+	FORMAT PROGRAMA QtSpim SIMULATORA
+
+Pravilno formatiran asemblerski source fajl se sastoji od dva dijela:
+	Sekcija za zapis podataka (data section)
+	Sekcija za zapis koda (text section)
+
+	ASEMBLERSKE DIREKTIVE I KOMENTARI
+
+Asemblerska direktiva je poruka asembleru, odnosno QtSpim simulatoru, kojom se govori asembleru nesto sto je potrebno da zna, kako bi mogao obaviti asembliranje. Asemblerske direktive pocinju sa ". „ Neophodne su za definisanje pocetka i kraja deklarisanja podataka, kao i za definisanje pocetka i kraja procedura/funkcija. Prilikom pisanja programa moguce je koristiti komentare. Karakter "#" oznacava programsku liniju sa komentarima. Sve sto se zapise nakon # se smatra komentarom (do kraja te programske linije). Prazne linije koda su prihvatljive.
+	Podaci moraju biti deklarisani u sekciji za zapis podataka (data section), direktiva: ".data"
+	Sve varijable i konstante se smjestaju u ovu sekciju.
+	Ime varijable mora poceti sa slovom, a u nastavku imena se mogu koristiti slova i brojevi (i specijalni karakter "_").
+	Odmah nakon imena varijable se zapisuju ":" (dvije tacke).
+	Definicija varijable ukljucuje: ime, tip podatka i pocetnu
+	vrijednost varijable.
+	Ispred tipa podatka je neophodna "."
+	Opsta forma deklaracije podatka je:
+<Ime_varijable>:     .<Tip_podatka>	<Pocetna_vrijednost>
+
+	DEKLARACIJA PODATAKA
+Deklaracija	
+.byte	8-bitna varijabla
+.half	16-bitna varijabla
+.word	32-bitna varijabla
+.ascii	ASCII string
+.asciiz	ASCII string terminisan nulom
+.float	32-bitni IEEE 754 floating point broj
+.double	64-bitni IEEE 754 floating point broj
+.space <n>	<n> bajta neinicijalizovane memorije
+
+	Integeri se definisu direktivama:  .word, .half, ili .byte.
+	Stringovi se definisu direktivama:  .ascii ili .asciiz
+
+	PROGRAMSKI KOD
+
+	Direktiva ".text" se navodi na pocetku sekcije za zapis programskog koda (text section).
+	Inicijalna/glavna procedura se oznacava sa „main".
+	Direktive ".globl <name>" i ".ent <name>" se koriste da  definisu ime inicijalne procedure.
+	Direktiva ".ent" je opcionalna u QtSpim simulatoru (nije  obavezna).
+	Inicijalna/glavna procedura mora poceti sa labelom
+	koja nosi ime procedure.
+	Inicijalna/glavna procedura (i sve ostale procedure) se zavrsavaju direktivom ".end <name>"
+
+	LABELE
+
+	Labele su lokacije u kodu, i obicno se koriste kao imena funkcija/procedura ili kao lokacija na koju se vrsi skok.
+	Prva upotreba labele je lokacija pocetka glavnog programa, koji se mora nazvati „main" (zahtjev QtSpim simulatora).
+	Pravila za definisanje labela:
+	Naziv labele mora poceti sa slovom
+	Ostatak imena moze sadrzati slova, brojeve ili podcrtu "_" (underscore)
+	Naziv labele se mora zavrsiti sa	":" (dvije tacke).
+	Ista labela se moze definisati samo jednom.
+# Sekcija za zapis podataka (data section)
+.data
+# deklaracija zeljenih podataka
+# ...
+
+# Sekcija za zapis koda (text section)
+.text
+.globl main
+.ent main	# opciono, nije obavezno u QtSpim-u
+
+main:
+# zapis programskog koda
+# ...
+Oznaka	Opis
+Rdest	Operand koji određuje destinaciju. Mora biti integer registar. Svaki novi upis ce prebrisati prethodni sadrzaj.
+Rsrc	Operand koji određuje izvor podatka. Mora biti integer register. Vrijednost se ne mijenja nakon izvrsenja instrukcije.
+Src	Operand koji određuje izvor podatka. Mora biti integer register ili immediate vrijednost. Vrijednost se ne mijenja nakon izvrsenja instrukcije.
+FRdest	Operand koji određuje destinaciju. Mora biti floating point registar. Svaki novi upis ce prebrisati prethodni sadrzaj.
+FRsrc	Operand koji određuje izvor podatka. Mora biti floating point register.
+Vrijednost se ne mijenja nakon izvrsenja instrukcije.
+Imm	Immediate vrijednost
+Mem	Memorijska lokacija. Moze biti ime promjenljive ili indirektna referenca (npr. memorijska adresa).	
+# Kraj programskog koda
+li $v0, 10
+syscall
+.end main
+
+	INSTRUKCIJE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	CITANJE I SMJESTANJE PODATAKA
+
+	Load i store instrukcije vrse transfer podataka između memorije i registara, i obrnuto.
+
+Instrukcija	Opis
+l <type>	Rdest, mem	Ucitaj vrijednost sa memorijske lokacije u destinacioni registar.
+li	Rdest, imm	Ucitaj immediate vrijednost u destinacioni registar.
+la	Rdest, mem	Ucitaj adresu memorijske lokacije udestinacioni registar.
+s <type> Rsrc, mem	Smjesti sadrzaj source registra na memorijsku lokaciju.
+
+	Move instrukcije vrse transfer podataka između registara.
+
+Instrukcije	Opis
+move	Rdest, RSrc	Kopiraj sadrzaj integer source registra u integer odredisni registar
+mfhi	Rdest	Kopiraj sadrzaj iz $hi registra u Rdest
+mflo	Rdest	Kopiraj sadrzaj iz $lo registra u Rdest
+mthi	Rdest	Kopiraj sadrzaj u $hi registar iz Rdest
+mtlo	Rdest	Kopiraj sadrzaj u $lo registar iz Rdest
+
+	ARITMETICKE OPERACIJE
+
+Instrukcija	Opis
+add	Rdest, Rsrc, Src	Signed sabiranje, Rdest = Rsrc + Src ili Imm
+addu	Rdest, Rsrc, Src	Unsigned sabiranje, Rdest = Rsrc + Src ili Imm
+sub	Rdest, Rsrc, Src	Signed oduzimanje, Rdest = Rsrc – Src ili Imm
+subu	Rdest, Rsrc, Src	Unsigned oduzimanje, Rdest = Rsrc – Src ili Imm
+mul	Rdest, Rsrc, Src	Signed mnozenje bez prekoracenja, Rdest = Rsrc * Src ili Imm
+mulo	Rdest, Rsrc, Src	Signed mnozenje sa prekoracenjem,
+Rdest = Rsrc * Src ili Imm
+mulou	Rdest, Rsrc, Src	Unsigned mnozenje sa prekoracenjem, Rdest = Rsrc * Src ili Imm
+mult	Rsrc1, Rsrc2	Signed 64-bit mnozenje, $hi/$lo = Rsrc1 * Rsrc2
+multu	Rsrc1, Rsrc2	Unsigned 64-bit mnozenje, $hi/$lo = Rsrc1 * Rsrc2
+div	Rdest, Rsrc, Src	Signed dijeljenje, Rdest = Rsrc / Src ili Imm
+divu	Rdest, Rsrc, Src	Unsigned dijeljenje, Rdest = Rsrc / Src ili Imm
+div	Rsrc1, RSrc2	Signed dijeljenje sa ostatkom,
+$lo = Rsrc1 / RSrc2
+$hi = Rsrc1 % RSrc2
+divu	Rsrc1, RSrc2	Unsigned dijeljenje sa ostatkom,
+$lo = Rsrc1 / RSrc2
+$hi = Rsrc1 % RSrc2
+rem	Rdest, Rsrc, Src	Signed ostatak, Rdest = Rsrc % Src ili Imm
+remu	Rdest, Rsrc, Src	Unsigned ostatak, Rdest = Rsrc % Src ili Imm
+abs	Rdest, Rsrc	Apsolutna vrijednost, Rdest = | Rsrc |
+neg	Rdest, Rsrc	Negativna vrijednost, Rdest = - Rsrc
+
+
+
+Treca prezentacija
+
+	INSTRUKCIJE SKOKA
+
+Asemblerski jezik omogucava upotrebu dva tipa instrukcija skoka: 
+	Instrukcije bezuslovnog skoka (unconditional branch/jump), 
+	Instrukcije uslovnog skoka (conditional branch) 
+Instrukcija bezuslovnog skoka: 
+j<label>  
+	Ova instrukcija omogucava bezuslovni skok na specificiranu labelu.
+	Instrukcije uslovnog skoka omogucavaju uslovni skok na specificiranu labelu u zavisnosti od ispunjenja postavljenog uslova.
+	Standardni set instrukcija uslovnog skoka cine: 
+	branch equal, branch not equal, branch less than, branch less than or equal, branch greater than, and branch greater than or equal.
+
+Instrukcija	Opis
+beq <Rsrc>, <Src>, <label>	Skoci na labelu ako su <Rsrc> i <Src> jednaki
+bne <Rsrc>, <Src>, <label>	Skoci na labelu ako su <Rsrc> i <Src> razliciti
+blt <Rsrc>, <Src>, <label>	Signed instrukcija skoka na labelu ako je <Rsrc> manje od <Src>
+ble <Rsrc>, <Src>, <label>	Signed instrukcija skoka na labelu ako je <Rsrc>manje ili jednako <Src>
+bgt <Rsrc>, <Src>, <label>	Signed instrukcija skoka na labelu ako je <Rsrc> vece od <Src>
+bge <Rsrc>, <Src>, <label>	Signed instrukcija skoka na labelu ako je <Rsrc>vece ili jednako <Src>
+bltu <Rsrc>, <Src>, <label>	Unsigned instrukcija skoka na labelu ako je <Rsrc> manje od <Src>
+bleu <Rsrc>, <Src>, <label>	Unsigned instrukcija skoka na labelu ako je <Rsrc> manje ili jednako <Src>
+bgtu <Rsrc>, <Src>, <label>	Unsigned instrukcija skoka na labelu ako je <Rsrc>
+vece od <Src>
+bgeu <Rsrc>, <Src>, <label>	Unsigned instrukcija skoka na labelu ako je <Rsrc> vece ili jednako <Src>
+
+	Navedene instrukcije rade sa 32-bitnim registrima. 
+	Svaka od naredbi uslovnog skoka moze biti modifikovana dodavanjem slova ‘z’ na kraj imena instrukcije. Na taj nacin se dobija naredba koja vrsi poređenje sa nulom (0) bez potrebe koriscenja immediate 0 u instrukciji.
+	Instrukcija bne $t0, 0, loop1 se moze zapisati kao: bnez $t0, loop1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	NACINI ADRESIRANJA
+
+	Adresiranje podrazumijeva specificiranje vrijednosti ili adrese podatka kome se pristupa radi citanja ili upisa. 
+	Moze ukljuciti stvarnu vrijednost, ime varijable, ili njenu lokaciju u nizu. 
+	MIPS arhitektura, koju simulira QtSpim simulator, je 32- bitna, pa su stoga i adrese tipa word, odnosno zauzimaju 32 bita.  
+	Nacini adresiranja: 
+	Direktno (registar ili memorijska lokacija sadrzi konkrente vrijednosti. 
+	lw $t0, varijabla1 
+	lw $t1, varijabla2)
+	Immediate (konkretna vrijednost je jedan od operanada.
+	li $t0, 57 		# 57 je immediate adresiran 
+	add $t0, $t0, 57)
+	Indirektno (Par zagrada ( ) se koristi da oznaci ovaj nacin adresiranja. CPU cita prilozenu adresu, a potom ide na tu adresu da pristupi vrijednosti. Indirektno adresiranje zahtijeva vise angazovanja CPU od prethodno pomenutih nacina adresiranja. Na ovaj nacin se pristupa elementima niza.
+	la $t0, lst # adresa lst je 32-bitna 
+	lw $s1, ($t0))
+
+	STEK
+
+	Stek je memorijska struktura za skladistenje podataka i intenzivno se koristi prilikom realizacije funkcija, odnosno procedura. 
+	Podaci se unose na stek, a potom se citaju u obrnutnom redosljedu. Preciznije, podaci koji se posljednji dodaju na stek se prvi citaju sa steka. Ovaj princip funkcionisanja se naziva Last-In, First-Out (LIFO). 
+	Dodavanje podataka na stek se naziva push operacijom, a uklanjanje podataka sa steka se naziva pop operacijom.
+	Pokazivac na vrh steka je $sp, odnosno $29.
+	Stek se popunjava odozgo prema dolje. Podaci koji se smjestaju ili preuzimaju sa steka su word formata (32- bita).
+	Push i pop operacije nijesu realizovane u asemblerskom jeziku, pa ih je potrebno napraviti pomocu postojecih instrukcija.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cetvrta prezentacija
+
+	PROCEDURE (ili funkcije) 
+
+	sastoje se od niza instrukcija koje se mogu izvrsavati pozivom u bilo kojoj tacki izvrsavanja cijelog programa, ukljucujuci slucaj izvrsavanja u drugim procedurama.
+	Sa aspekta pozivanja procedure, postoje dvije primarneaktivnosti: povezivanje (linkage) i prosljeđivanje argumenata.
+	Uopsteno govoreci, postoje dva tipa procedura:
+	Procedure koje ne pozivaju druge procedure (leaf procedures),
+	Procedure koje pozivaju druge procedure (non-leaf procedures).
+	Takođe, definisane su konvencije pozivanja (calling convention) koje definisu odnos rutine koja vrsi pozivanje (caller) i rutine koja se poziva (callee).
+	Tako postoje:
+	Caler konvencija
+	Calee konvencija
+
+	CALER konvencija 
+
+	Ovom konvencijom su definisani zahtjevi za caller, odnosno za rutinu koja poziva proceduru:
+	Pozivajuca rutina treba da sacuva sve nesacuvane registre ($a0 - $a3, $t0 - $t9, $v0, $v1) koji su neophodni nakog sto se poziv ostvari; Pozivajuca rutina treba da proslijedi sve argumente. Za rad sa integer-ima:
+	Prvi argument se prosljeđuje u $a0;
+	Drugi argument se prosljeđuje u $a1;
+	Treci argument se prosljeđuje u $a2;
+	Cetvrti argument se prosljeđuje u $a3;
+	Ostali argumenti (ako ih ima) se prosljeđuju pomocu steka.
+	Pozivajuca rutina koristi instrukciju:
+jal ImeProcedure
+	Nakon zavrstetka procedure, caller mora da vrati sve nesacuvane registre i prilagodi pokazivac na vrh steka($sp) ukoliko su argumenti proslijeđivani pomocu steka.
+
+	POVEZIVANJE (linkage)
+
+	Pojam povezivanja (linkage) u kontekstu procedura se odnosni na osnovni poces „odlaska” na proceduru i „vracanja” na tacnu lokaciju u pozivajucoj rutini. 
+	Operacija povezivanja se obavlja upotrebom instrukcija jal i jr. Obije instrukcije koriste $ra registar.
+	$ra register ($31) je setovan na povratnu adresu kao sastavni dio poziva procedure.
+	jal (jump and link) instrukcija kopira $pc u $ra register I skace na proceduru.
+	$pc sadrzi adresu sljedece instrukcije koja treba da se izvrsi. 
+	Povratak iz procedure se obavlja instrukcijom: jr $ra
+	Ukoliko pak procedura poziva neku drugu proceduru, registar $ra mora biti sacuvan. Posto $ra sadrzi povratnu adresu ona ce biti promijenjena kada procedura pozove sljedecu proceduru.
+	stoga, $ra mora biti sacuvan i vracen sa steka u pozivajucoj rutini. Ovo se tipicno obavlja samo jednom na pocetku, a potom na kraju procedure. 
+
+
+
+
+	PROSLJEDJIVANJE ARGUMENATA
+
+	Integer argumenti se prosljeđuju pomocu registara: 
+$a0, $a1, $a2, $a3
+upravo navedenim redosljedom. Ostali argumenti (ako ih ima) se prosljeđuju pomocu steka. 
+	Procedura vraca rezultate kroz registre: $v0 i/ili $v1
+
+	KONVENCIJA CUVANJA REGISTARA
+
+	MIPS calling konvencija zahtijeva da samo određeni registri (ne svi) budu sacuvani prilikom poziva procedura. 
+	Integer registeri $s0 -$s7 moraju biti sacuvani od strane procedure.
+	Prilikom pisanja procedure to znaci da integer registri $s0 -$s7 budu smjesteni/iscitani sa steka ukoliko su korisceni/mijenjani. 
+	Integer registri $t0 -$t9 se koriste za cuvanje privremenih vrijednostitako da ne moraju biti cuvani u okviru procedure. 
+	Registri $at, $k0 i $k1 su rezervisani od strane asemblera i operativnog sistema, i ne trebaju da se koriste u programima.
+	Registar $fp (frame pointer) se upotrebljava kada se argumenti procedure prosljeđuju pomocu steka. 
+	Register $gp je globalni pokazivac (pokazuje na globalno dostupne podatke). Ovaj registar se u principu ne koristi direktno kada se pisu asemblerski programi.
+
+	CALLE KONVENCIJA
+
+	Ovom konvencijom su definisani zahtjevi za callee, odnosno zapozvanu proceduru:
+	Smjesti bilo koji promijenjenisavedregistar na stek. 
+	Ovo se odnosi nainteger registre $s0 -$s7, $ra, $fp, ili $gp. 
+	Ako callee procedura poziva neku drugu proceduru, $ra mora biti sacuvan. 
+	Ako se $fp mijenja, $fp mora biti sacuvan. Ovo se desava u situacijama kada se argumenti prosljeđuju putem steka. Ako se argumeti smjestaju na stek, $fp se podesava na sljedeci nacin: $fp = $sp + (velicina frejma). Na ovaj nacin ce$fppokazivati na prvi argument smjesten na steku.
+	Prostor za lokalne varijable treba biti kreiran na steku (dinamicke lokalne promjenljive).
+	Kada se mijenja $sp registar, to je potrebno uraditi u jednoj operaciji (ne u vise uzastopnih). 
+	Procedura moze da pristupi integer argumentima u registrima $a0 -$a3.
+
+	Argumentima koji su proslijeđeni pomocu steka se pristupa koriscenjem $fp. 
+	Procedura smjesta povratne vrijednosti (ukoliko ih ima) u $v0 i $v1.
